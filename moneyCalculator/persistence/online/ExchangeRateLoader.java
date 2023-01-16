@@ -1,6 +1,5 @@
 package moneyCalculator.persistence.online;
 
-import moneyCalculator.*;
 import moneyCalculator.model.Currency;
 import moneyCalculator.model.ExchangeRate;
 

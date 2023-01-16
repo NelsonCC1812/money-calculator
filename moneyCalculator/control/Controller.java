@@ -4,7 +4,6 @@ import moneyCalculator.model.Currency;
 import moneyCalculator.model.ExchangeRate;
 import moneyCalculator.model.Money;
 import moneyCalculator.persistence.online.ExchangeRateLoaderFromWebService;
-import moneyCalculator.view.SwingDialog;
 import moneyCalculator.view.dialog.Dialog;
 import moneyCalculator.view.display.Display;
 

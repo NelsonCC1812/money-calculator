@@ -6,7 +6,6 @@ import javax.swing.SwingUtilities;
 
 import moneyCalculator.control.Controller;
 import moneyCalculator.model.Currency;
-import moneyCalculator.model.Money;
 import moneyCalculator.persistence.local.CurrencyLoaderFromFile;
 import moneyCalculator.persistence.online.ExchangeRateLoaderFromWebService;
 import moneyCalculator.view.SwingDialog;
