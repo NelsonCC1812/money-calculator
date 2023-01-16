@@ -2,34 +2,33 @@ package moneyCalculator;
 
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
+import moneyCalculator.control.Controller;
 import moneyCalculator.model.Currency;
-import moneyCalculator.model.ExchangeRate;
-import moneyCalculator.persistence.*;
+import moneyCalculator.model.Money;
 import moneyCalculator.persistence.local.CurrencyLoaderFromFile;
-import moneyCalculator.persistence.online.ExchangeRateLoaderFromWebService;;
+import moneyCalculator.persistence.online.ExchangeRateLoaderFromWebService;
+import moneyCalculator.view.SwingDialog;
+import moneyCalculator.view.SwingMoneyCalculator;
 
 public class MoneyCalculator {
 
     public static void main(String[] args) {
+
         CurrencyLoaderFromFile currencyLoaderFromFile = new CurrencyLoaderFromFile("currencies");
-        List<Currency> list = currencyLoaderFromFile.loadCurrencies();
+        List<Currency> currencies = currencyLoaderFromFile.loadCurrencies();
 
-        for (Currency currency : list) {
-            System.out.println(currency.getCode() + " " + currency.getName() + " " + currency.getSymbol());
-        }
+        ExchangeRateLoaderFromWebService exchangeRateLoaderFromWebService = new ExchangeRateLoaderFromWebService();
 
-        ExchangeRateLoaderFromWebService ExchangeRateLoaderFromWebService = new ExchangeRateLoaderFromWebService();
+        SwingDialog dialog = new SwingDialog(currencies);
 
-        for (Currency currencyFrom : list) {
-            for (Currency currencyTo : list) {
-                if (!currencyFrom.getCode().equals((currencyTo.getCode()))) {
-                    ExchangeRate exchangeRate = ExchangeRateLoaderFromWebService.exchangeRateLoader(currencyFrom,
-                            currencyTo);
-                    System.out
-                            .println((exchangeRate.getFrom().getCode() + " - " + exchangeRate.getTo().getCode() + " : "
-                                    + exchangeRate.getRate()));
-                }
+        new Controller(dialog, exchangeRateLoaderFromWebService);
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new SwingMoneyCalculator(dialog, "Money Calculator Display");
             }
-        }
+        });
     }
 }

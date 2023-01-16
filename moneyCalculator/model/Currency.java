@@ -22,4 +22,9 @@ public class Currency {
     public String getSymbol() {
         return this.symbol;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s - %s (%s)", this.code, this.name, this.symbol);
+    }
 }
